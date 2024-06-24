@@ -135,7 +135,7 @@ const renderThemeToggle = () => {
 
     const buttons = buttonsInfo.map((buttonInfo) => createThemeButton(buttonInfo))
     buttons.forEach(button => themeDiv.insertAdjacentHTML("beforeend",button))
-
+    console.log("wut wuttt")
 /*
     const themeDiv = document.getElementById('theme')
     const buttonsInfo = [{name: 'Dark',classes: ['dark:hidden', 'block']},{name: 'Light',classes: ['hidden', 'dark:block']}]
