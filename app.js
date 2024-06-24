@@ -21,7 +21,7 @@ const setView = (v) => {
     }
 }
 
-// Toggle the visibility of the dropdown menu and the hamburger icon ~~~~~~~~~~~~~~~~~~~~~~~~~~ I think this also does somthing about changing the menu to ddList when hide = false but I'm not sure how exactly
+// Toggle the visibility of the dropdown menu and the hamburger icon
 const toggleMenu = (hide) => {
     if (!hide) {
         ddMenu.classList.toggle('hidden')
@@ -35,6 +35,7 @@ const toggleMenu = (hide) => {
     }
 }
 
+//create element of keyad with all buttons in it to render calculator
 const addRow = (container, content) => {
     const row = `<div class='grid grid-cols-5 gap-2'>${content}</div>`
     container.insertAdjacentHTML('beforeend', row)
@@ -50,17 +51,19 @@ const addMonitor = (container, text) => {
     container.insertAdjacentHTML('beforeend', monitor)
 }
 
-// creates div for a single button
+// returns div for a single button
 const button = (text) => {
     const c = text === 'calculate' ? 'col-span-4' : ''
     return `<div class='bg-blue-400 hover:bg-blue-600 text-white ${c} py-1 rounded-md text-center text-lg font-bold cursor-pointer d-btn'>${text}</div>`
 }
 
+// create alll button divs and insert them to keypad div
 const addButtons = (container, nums) => {
     const btnHTML = nums.map((n) => button(n)).join('')
     addRow(container, btnHTML)
 }
 
+// function for button press of calculator, defines functionality of every button
 const click = (event) => {
     const monitor = document.getElementById('monitor')
     const bac = monitor.innerText.trim()
@@ -75,7 +78,7 @@ const click = (event) => {
     }
 }
 
-// renders calculator in page
+// renders 'calculator' section in page
 const renderCalculator = () => {
     const labels = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, '+', '-', '*', '/', '**', 'calculate', 'clear']
     app.innerHTML = ''
@@ -99,12 +102,15 @@ const renderContact = () => {
 
 // renders top menu of page
 const renderMenu = () => {
+    // create buttons foe drop down version
     const ddMenuDiv = document.getElementById('ddMenu')
     ddMenuDiv.classList = `absolute top-[56px] left-0 bg-blue-300 p-3 hidden w-full`
 
+    // create buttons for standard version
     const menuButtonsDiv = document.getElementById('menu-buttons')
     menuButtonsDiv.classList.add('justify-start', 'gap-4', 'hidden', 'sm:flex')
     
+    // button list to create
     const buttons = ['Calculator', 'About', 'Contact']
 
     // create each button
@@ -113,7 +119,7 @@ const renderMenu = () => {
         const ddListButton = `<button class="block py-1 px-2" onclick="setView('${buttonName}')">${buttonName}</button>`
         ddMenuDiv.insertAdjacentHTML('beforeend',ddListButton)
 
-        // regular button
+        // standard button
         const button = `<button onclick="setView('${buttonName}')">${buttonName}</button>`
         menuButtonsDiv.insertAdjacentHTML('beforeend',button)
     });
@@ -122,16 +128,24 @@ const renderMenu = () => {
 // render theme buttons (Light / Dark)
 const renderThemeToggle = () => {
     const themeDiv = document.getElementById('theme')
-    const buttonsInfo = [{name: 'Dark',classes: ['dark:hidden', 'block']},{name: 'Light',classes: ['hidden', 'dark:block']}]
+    const buttonsInfo = [
+        {
+            name: 'Dark',
+            classes: 'dark:hidden block'
+        },
+        {
+            name: 'Light',
+            classes: 'hidden dark:block'
+        }
+    ]
 
-    // create each button
-    buttonsInfo.forEach(buttonInfo => {
-        const button = document.createElement('button')
-        button.textContent = buttonInfo.name
-        button.addEventListener('click',toggle)
-        buttonInfo.classes.forEach(classString => button.classList.add(classString))
-        themeDiv.appendChild(button)
-    })
+    const buttons = buttonsInfo.map((buttonInfo) => createThemeButton(buttonInfo))
+    buttons.forEach(button => themeDiv.insertAdjacentHTML("beforeend",button))
+}
+
+// returns a theme button
+const createThemeButton = (buttonInfo) => {
+    return `<button class="${buttonInfo.classes}" onclick="toggle()">${buttonInfo.name}</button>`
 }
 
 renderMenu()
