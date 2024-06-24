@@ -36,42 +36,9 @@
                         />
                     </svg>
                 </button>
-                <div
-                    class="absolute top-[56px] left-0 bg-blue-300 p-3 hidden w-full"
-                    id="ddMenu"
-                >
-                    <button
-                        class="block py-1 px-2"
-                        onclick="setView('Calculator')"
-                    >
-                        Calculator
-                    </button>
-                    <button
-                        class="block py-1 px-2"
-                        onclick="setView('About')"
-                    >
-                        About
-                    </button>
-                    <button
-                        class="block py-1 px-2"
-                        onclick="setView('Contact')"
-                    >
-                        Contact
-                    </button>
-                </div>
-                <div class="justify-start gap-4 hidden sm:flex">
-                    <button onclick="setView('Calculator')">Calculator</button>
-                    <button onclick="setView('About')">About</button>
-                    <button onclick="setView('Contact')">Contact</button>
-                </div>
-                <div>
-                    <button class="dark:hidden block" onclick="toggle()">
-                        Dark
-                    </button>
-                    <button class="hidden dark:block" onclick="toggle()">
-                        Light
-                    </button>
-                </div>
+                <div id="ddMenu"></div>
+                <div id="menu-buttons"></div>
+                <div id="theme"></div>
             </div>
             <div class="py-4">
                 <h1 class="text-3xl border-b-[10px] border-blue-300 pb-4">
