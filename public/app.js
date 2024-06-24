@@ -21,7 +21,7 @@ const setView = (v) => {
     }
 }
 
-// Toggle the visibility of the dropdown menu and the hamburger icon ~~~~~~~~~~~~~~~~~~~~~~~~~~ I think this also does somthing about changing the menu to ddList when hide = false but I'm not sure how exactly
+// Toggle the visibility of the dropdown menu and the hamburger icon
 const toggleMenu = (hide) => {
     if (!hide) {
         ddMenu.classList.toggle('hidden')
@@ -122,6 +122,22 @@ const renderMenu = () => {
 // render theme buttons (Light / Dark)
 const renderThemeToggle = () => {
     const themeDiv = document.getElementById('theme')
+    const buttonsInfo = [
+        {
+            name: 'Dark',
+            classes: 'dark:hidden block'
+        },
+        {
+            name: 'Light',
+            classes: 'hidden dark:block'
+        }
+    ]
+
+    const buttons = buttonsInfo.map((buttonInfo) => createThemeButton(buttonInfo))
+    buttons.forEach(button => themeDiv.insertAdjacentHTML("beforeend",button))
+
+/*
+    const themeDiv = document.getElementById('theme')
     const buttonsInfo = [{name: 'Dark',classes: ['dark:hidden', 'block']},{name: 'Light',classes: ['hidden', 'dark:block']}]
 
     // create each button
@@ -132,8 +148,12 @@ const renderThemeToggle = () => {
         buttonInfo.classes.forEach(classString => button.classList.add(classString))
         themeDiv.appendChild(button)
     })
+    */
 }
 
+const createThemeButton = (buttonInfo) => {
+    return `<button class="${buttonInfo.classes}" onclick="toggle()">${buttonInfo.name}</button>`
+}
 renderMenu()
 renderThemeToggle()
 renderCalculator()
